@@ -49,6 +49,10 @@ func (a *AdapterStat) parseMegaRaidVdInfo(info string) error {
 			for _, line := range lines {
 				err := vd.parseLine(line)
 				if err != nil {
+					//输出结果可能 N/A, 忽略.
+					if strings.Contains(err.Error(), "N/A") {
+						continue
+					}
 					return err
 				}
 			}
@@ -99,6 +103,10 @@ func (a *AdapterStat) parseMegaRaidPdInfo(info string) error {
 			for _, line := range lines {
 				err := pd.parseLine(line)
 				if err != nil {
+					//输出结果可能 N/A, 忽略.
+					if strings.Contains(err.Error(), "N/A") {
+						continue
+					}
 					return err
 				}
 			}
